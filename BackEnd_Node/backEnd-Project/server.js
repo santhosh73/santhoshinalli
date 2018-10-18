@@ -39,5 +39,27 @@ app.post('/register',(req,res)=>{
     //res.send('Hello,'+result[0].cusr_name);
   })
 });
+
+app.get('/fetch',(req,res)=>{
+  console.log("inside the get function::::")
+  connection.query('select * from cusr',(error,results,field)=>{
+    if(error)throw error
+    console.log("values are fetched successfully::::")
+    res.end(JSON.stringify(results));
+  })
+});
+
+app.delete('/deleteUser/:id',(req,res)=>{
+console.log("am in delete section",req.params)
+connection.query('delete from `cusr` where `cusr_id`=?',[req.params.id],(error,results,fields)=>{
+  if(error)throw error;
+  console.log("after deleting the record::::")
+  let text='{"response":"Record has been deleted successfully!!!!"}';
+  text=JSON.parse(text);
+  console.log("59:::::::",text)
+  console.log("60:::::::",JSON.stringify(text))
+  res.end(JSON.stringify(text));
+});
+});
     
 app.listen(3000);

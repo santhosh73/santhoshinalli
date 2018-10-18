@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
-import { CommonServiceService } from '../../common-service.service';
+//import { CommonServiceService } from '../../common-service.service';
 import { AlertService } from 'src/app/service/alert.service';
 import { Router } from '@angular/router';
+import { CommonServiceService } from 'src/app/service/common-service.service';
 
 
 @Component({
@@ -28,18 +29,18 @@ export class RegisterComponent implements OnInit {
       gender:['',Validators.required],
       city:['',Validators.required],
       state:['',Validators.required],
-      zip:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6)]],
+      zip:['',[Validators.required,Validators.maxLength(6)]],
       password:['',[Validators.required,Validators.minLength(6)]],
       password1:['',[Validators.required,Validators.minLength(6)]]
     });
   }
 
-  get id(){
-    return this.registerForm.controls;
-  }
+  // get id(){
+  //   return this.registerForm.controls;
+  // }
 
   submit(){
-    console.log("/:::::::::::::::"+this.id.firstName.value)
+    //console.log("/:::::::::::::::"+this.id.firstName.value)
     console.log("/:::::::::::::::"+this.registerForm.controls.firstName.value)
     this.service.register(this.registerForm.value).subscribe(data=>{
       console.log("after the getting the response:::::",data)
